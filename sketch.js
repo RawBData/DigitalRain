@@ -1,17 +1,126 @@
 /*
 This is a simple matrix lettering program written in P5 Javascript
+View this online @    https://rawbdata.github.io/DigitalRain/
 Started On: 4/4/18
 Finished On: Pending
 */
-var streams = [];
+var streams;
 var symbolSize = 20;
+var charCodeStart;
+var charCodeEnd;
+var reset = false;
+var charactersToUse;
 
 function setup(){
+	charactersToUse = createSelect();
+	charactersToUse.option('Kata');
+	charactersToUse.option('English');
+	charactersToUse.option('IPA');
+	charactersToUse.option('Devanagari');
+	charactersToUse.option('Cyrillic');
+	charactersToUse.option('Hebrew');
+	charactersToUse.option('Arabic');
+	charactersToUse.option('Bengali');
+	charactersToUse.option('Tibetan');
+	charactersToUse.option('Hangul');
+	charactersToUse.option('Chinese');
+	charactersToUse.option('Ethiopic');
+	charactersToUse.option('Ben');
+  	charactersToUse.changed(setDisplayCharacters);
+
+  	charactersColor = createSelect();
+  	charactersColor.option('Matrix');
+	charactersColor.option('Hong Kong Neon');
+	charactersColor.option('Warriors');
+	charactersColor.option('USA');
+	charactersColor.option('Noir');
+	charactersColor.option('Rainbow');
+
+
 	createCanvas(
 		window.innerWidth,
 		window.innerHeight	
 	);
 	background(0);
+	setDisplayCharacters();
+
+	textSize(symbolSize);
+
+}
+
+function setDisplayCharacters(){
+	console.log(charactersToUse.value())
+	var displayCharacters = charactersToUse.value();
+
+	switch(displayCharacters) {
+	    case "Kata":
+	        charCodeStart = 0x30A0;
+	        charCodeEnd = 0x30FF;
+	        break;
+	    case "English":
+	    	charCodeStart = 0x0021;
+	        charCodeEnd = 0x007E;
+	        break;
+	    case "IPA":
+	    	charCodeStart = 0x0250;
+	        charCodeEnd = 0x02AF;
+	        break;
+	    case "Devanagari":
+	    	charCodeStart = 0x0900;
+	        charCodeEnd = 0x097F;
+	        break;
+	    case "Cyrillic":
+	    	charCodeStart = 0x0400;
+	        charCodeEnd = 0x04F9;
+	        break;
+	    case "Hebrew":
+	    	charCodeStart = 0x05D0;
+	        charCodeEnd = 0x05F2;
+	        break;
+	       case "Arabic":
+	        charCodeStart = 0x061F;
+	        charCodeEnd = 0x06FE;
+	        break;
+	    case "Bengali":
+	    	charCodeStart = 0x0981;
+	        charCodeEnd = 0x09FA;
+	        break;
+	    case "Tibetan":
+	    	charCodeStart = 0x0F00;
+	        charCodeEnd = 0x0FCF;
+	        break;
+	    case "Hangul":
+	    	charCodeStart = 0x1100;
+	        charCodeEnd = 0x11F9;
+	        break;
+	    case "Chinese":
+	    	charCodeStart = 0xF900;
+	        charCodeEnd = 0xFA2D;
+	        break;
+	    case "Ethiopic":
+	    	charCodeStart = 0x1200;
+	        charCodeEnd = 0x137C;
+	        break;
+	    case "Ben":
+	    	charCodeStart = 0x05D0;
+	        charCodeEnd = 0x02AF;
+	        break;     
+	    default:
+	        charCodeStart = 0x30A0;
+	        charCodeEnd = 0x30FF;
+	}
+
+	//This check is necessary beceause a framecount check is done at 0 Frames
+	if (frameCount>0){
+		reset = true;
+	}
+
+	setStreamWithDisplayCharacters();
+	reset = false;
+}
+
+function setStreamWithDisplayCharacters(){
+	streams = [];
 	var x = 0;
 	for (var i = 0; i <= width/symbolSize; i++) {
 		var stream = new Stream();
@@ -19,9 +128,7 @@ function setup(){
 		streams.push(stream);
 		x += symbolSize;
 	}
-
-	textSize(symbolSize);
-
+	console.log(streams);
 }
 
 function draw(){
@@ -40,10 +147,8 @@ function Symbol(x,y,speed,first){
 	this.first = first;
 
 	this.setToRandomSymbol = function() {
-		if (frameCount % this.switchInterval == 0 ){
-			this.value = String.fromCharCode(
-			0x30A0 + round(random(0,96))
-			);
+		if (frameCount % this.switchInterval == 0 || reset == true){
+			this.value = String.fromCharCode(round(random(charCodeStart,charCodeEnd)));
 		}
 	}
 
@@ -59,7 +164,6 @@ function Stream(){
 	this.speed = random(5, 10);
 
 	this.generateSymbols = function(x,y){
-		
 		for (var i =0; i <= this.totalSymbols; i++){
 			var different = round(random(0,15)) == 1;
 			symbol = new Symbol(x,y,this.speed,different);
