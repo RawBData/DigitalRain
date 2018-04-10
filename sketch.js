@@ -214,19 +214,6 @@ function draw(){
 	
 	if (ColorSelect == "Warriors"){
 		background(255);
-		var imageSizeWidth = (imgBasketball.width/10);
-		var imageSizeheight = (imgBasketball.height/10);
-		var x = 0;
-		var y;
-
-		for (var i = 0; i <= width/imageSizeWidth; i++) {
-			y = 0;
-			for (var j = 0; j <= height/imageSizeheight; j++) {
-				image(imgBasketball, x, y, imgBasketball.width/10, imgBasketball.height/10);
-				y += imageSizeheight;
-			}
-			x += imageSizeWidth;
-		}
 	}else if (ColorSelect == "Noir"){
 		background(126, 200)
 	}else{
