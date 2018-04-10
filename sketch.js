@@ -289,6 +289,8 @@ function Stream(){
 				}else if (ColorSelect == "USA"){
 					if ((symbol.y>(height/2+height/6) && symbol.y<(height-height/6))||(symbol.y<(height/4-height/12) && symbol.x>width*.66)){
 						fill(RRC, GRC, BRC);
+					}else if (symbol.x>width*.66 && symbol.y<height/2 && symbol.y>(height/4+height/12)) {
+						fill(round(random(0,255)),round(random(0,255)),round(random(0,255)))
 					}else{	
 						fill(255);
 					}
