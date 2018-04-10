@@ -214,21 +214,23 @@ function draw(){
 	
 	if (ColorSelect == "Warriors"){
 		background(255);
-		var imageSize = 20;
+		var imageSize = (imgBasketball.width/10);
 		var x = 0;
 		var y = 0
 
-	for (var i = 0; i <= width/imageSize; i++) {
-		image(imgBasketball, 0, 0, imgBasketball.width/5, imgBasketball.height/5);
-		// var stream = new Stream();
-		// stream.generateSymbols(x,random(-1001,height/2));
-		// streams.push(stream);
-		x += imageSize;
-	}
+		for (var i = 0; i <= width/imageSize; i++) {
+			image(imgBasketball, x, y, imgBasketball.width/10, imgBasketball.height/10);
+			// var stream = new Stream();
+			// stream.generateSymbols(x,random(-1001,height/2));
+			// streams.push(stream);
+			x += imageSize;
+		}
 
 	}else{
 		background(0, 200);
 	}
+
+
 	streams.forEach(function(stream){
 		stream.render();
 	}); 
