@@ -219,9 +219,9 @@ function draw(){
 		var x = 0;
 		var y;
 
-		for (var i = 0; i <= width/imageSize; i++) {
+		for (var i = 0; i <= width/imageSizeWidth; i++) {
 			y = 0;
-			for (var j = 0; i <= height/imageSize; i++) {
+			for (var j = 0; j <= height/imageSizeheight; j++) {
 				image(imgBasketball, x, y, imgBasketball.width/10, imgBasketball.height/10);
 				y += imageSizeheight;
 			}
