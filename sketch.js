@@ -179,7 +179,7 @@ function setCharactersColor(){
 	    //var rando = round(random(184,255));
 
 	    	RRC = GRC = BRC = 206;
-			differentColor = color(169,169,169);
+			differentColor = color(56,56,56);
 	        console.log(RRC,GRC,BRC);
 	        break;
 
@@ -225,7 +225,8 @@ function draw(){
 			// streams.push(stream);
 			x += imageSize;
 		}
-
+	}else if (ColorSelect == "Noir"){
+		background(126, 200)
 	}else{
 		background(0, 200);
 	}
@@ -288,7 +289,8 @@ function Stream(){
 				//fill(244, 66, 86);
 				
 				if (ColorSelect == "Noir"){
-					fill(RRC, GRC, BRC);
+					fill(round(random(181,255)));
+					//fill(RRC, GRC, BRC);
 					//console.log("Got Here");
 				}else{
 					fill(RRC, GRC, round(random(0,255)));
