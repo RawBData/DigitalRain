@@ -57,7 +57,7 @@ function setup(){
 
 
 	//Load Image For Warriors
-	imgBasketball = loadImage("assets/BBALL.jpg");
+	imgBasketball = loadImage("assets/BBALL.png");
 
 	createCanvas(
 		window.innerWidth,
@@ -163,7 +163,7 @@ function setCharactersColor(){
 			differentColor = color(0,250,255);
 	        break;
 	    case "Warriors":
-	    	backgroundColor = color(229, 216, 34);
+	    	//backgroundColor = color(229, 216, 34);
 	    	RRC = 65;
 			GRC = 105;
 			BRC = 225;
@@ -213,9 +213,10 @@ function setStreamWithDisplayCharacters(){
 function draw(){
 	
 	if (ColorSelect == "Warriors"){
-		fill(RRC, GRC, BRC);
+		background(255);
+
 	}else{
-		background(backgroundColor, 200);
+		background(0, 200);
 	}
 	streams.forEach(function(stream){
 		stream.render();
