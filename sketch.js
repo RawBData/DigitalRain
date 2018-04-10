@@ -219,7 +219,7 @@ function draw(){
 		var y = 0
 
 	for (var i = 0; i <= width/imageSize; i++) {
-		image(imgBasketball, 0, 0, imgBasketball.width/5, img.height/5);
+		image(imgBasketball, 0, 0, imgBasketball.width/5, imgBasketball.height/5);
 		// var stream = new Stream();
 		// stream.generateSymbols(x,random(-1001,height/2));
 		// streams.push(stream);
