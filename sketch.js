@@ -17,7 +17,7 @@ var RRC;
 var GRC;
 var BRC;
 var ColorSelect;
-var backgroundColor;
+var specialBackgroundColor;
 
 var imgBasketball;
 
@@ -57,7 +57,7 @@ function setup(){
 
 
 	//Load Image For Warriors
-	imgBasketball = loadImage("BBALL.png");
+	//imgBasketball = loadImage("BBALL.png");
 
 	createCanvas(
 		window.innerWidth,
@@ -163,27 +163,28 @@ function setCharactersColor(){
 			differentColor = color(0,250,255);
 	        break;
 	    case "Warriors":
-	    	//backgroundColor = color(229, 216, 34);
-	    	RRC = 65;
-			GRC = 105;
-			BRC = 225;
+	    	specialBackgroundColor = color(130, 82, 1);
+	    	RRC = 0;
+			GRC = 61;
+			BRC = 200;
 			differentColor = color(255,215,0);
 	        break;
 	    case "USA":
-	    	RRC = 51;
-			GRC = 179;
-			BRC = round(random(0,255));
-			differentColor = color(240,255,225);
+	    	specialBackgroundColor = color(242, 244, 249);
+	    	RRC = 255;
+			GRC = 15;
+			BRC = 15;
+			differentColor = color(20, 52, 135);
 	        break;
 	    case "Noir":
-	    //var rando = round(random(184,255));
-
+	    	specialBackgroundColor = color(126, 126, 126);
 	    	RRC = GRC = BRC = 206;
 			differentColor = color(56,56,56);
 	        console.log(RRC,GRC,BRC);
 	        break;
 
 	    case "Rainbow":
+	    	specialBackgroundColor = color(round(random(0,255)), round(random(0,255)), round(random(0,255)));
 	    	RRC = 51;
 			GRC = 179;
 			BRC = round(random(0,255));
@@ -212,10 +213,8 @@ function setStreamWithDisplayCharacters(){
 
 function draw(){
 	
-	if (ColorSelect == "Warriors"){
-		background(255);
-	}else if (ColorSelect == "Noir"){
-		background(126, 200)
+	if (ColorSelect == "Warriors" || ColorSelect == "Noir" || ColorSelect == "USA" || ColorSelect == "Rainbow"){
+		background(specialBackgroundColor, 200);
 	}else{
 		background(0, 200);
 	}
@@ -224,10 +223,6 @@ function draw(){
 	streams.forEach(function(stream){
 		stream.render();
 	}); 
-}
-
-function renderBackGroundImageTile(){
-
 }
 
 function Symbol(x,y,speed,different){
@@ -281,6 +276,12 @@ function Stream(){
 					fill(round(random(181,255)));
 					//fill(RRC, GRC, BRC);
 					//console.log("Got Here");
+				} else if (ColorSelect == "Warriors"){
+					fill(RRC, GRC, round(random(BRC-10, BRC)));
+				}else if (ColorSelect == "USA"){
+					fill(RRC, GRC, BRC);
+				}else if (ColorSelect == "Rainbow"){
+					fill(round(random(0,255)), round(random(0,255)), round(random(0,255)));
 				}else{
 					fill(RRC, GRC, round(random(0,255)));
 				}
