@@ -11,7 +11,22 @@ var charCodeEnd;
 var reset = false;
 var charactersToUse;
 
+var regularColor;
+var differentColor;
+var RRC;
+var GRC;
+var BRC;
+var ColorSelect;
+
 function setup(){
+	//color setup for regular and different (special random letters)
+	ColorSelect = 'Hong Kong Neon';
+	//only passing two variable because using Blue number as random
+	RRC = 255;
+	GRC = 66;
+	BRC = round(random(0,255));
+	differentColor = color(0,250,255);
+
 	charactersToUse = createSelect();
 	charactersToUse.option('Kata');
 	charactersToUse.option('English');
@@ -29,12 +44,13 @@ function setup(){
   	charactersToUse.changed(setDisplayCharacters);
 
   	charactersColor = createSelect();
-  	charactersColor.option('Matrix');
-	charactersColor.option('Hong Kong Neon');
-	charactersColor.option('Warriors');
+  	charactersColor.option('Hong Kong Neon');
+	charactersColor.option('Matrix');
+	charactersColor.option("Warriors");
 	charactersColor.option('USA');
 	charactersColor.option('Noir');
 	charactersColor.option('Rainbow');
+	charactersColor.changed(setCharactersColor);
 
 
 	createCanvas(
@@ -77,7 +93,7 @@ function setDisplayCharacters(){
 	    	charCodeStart = 0x05D0;
 	        charCodeEnd = 0x05F2;
 	        break;
-	       case "Arabic":
+	    case "Arabic":
 	        charCodeStart = 0x061F;
 	        charCodeEnd = 0x06FE;
 	        break;
@@ -119,6 +135,57 @@ function setDisplayCharacters(){
 	reset = false;
 }
 
+function setCharactersColor(){
+	console.log(charactersColor.value())
+	var ColorSelect = charactersColor.value();
+	console.log(ColorSelect);
+
+	switch(ColorSelect) {
+	    case "Matrix":
+	        RRC = 0;
+			GRC = 255;
+			BRC = round(random(0,255));
+			differentColor = color(255,255,255);
+	        break;
+	    case "Hong Kong Neon":
+	    	RRC = 255;
+			GRC = 66;
+			BRC = round(random(0,255));
+			differentColor = color(0,250,255);
+	        break;
+	    case "Warriors":
+	    	RRC = 65;
+			GRC = 105;
+			BRC = 225;
+			differentColor = color(255,215,0);
+	        break;
+	    case "USA":
+	    	RRC = 51;
+			GRC = 179;
+			BRC = round(random(0,255));
+			differentColor = color(240,255,225);
+	        break;
+	    case "Noir":
+	    	RRC = 51;
+			GRC = 179;
+			BRC = round(random(0,255));
+			differentColor = color(240,255,225);
+	        break;
+	    case "Rainbow":
+	    	RRC = 51;
+			GRC = 179;
+			BRC = round(random(0,255));
+			differentColor = color(240,255,225);
+	        break;    
+	    default:
+	        RRC = 51;
+			GRC = 179;
+			BRC = round(random(0,255));
+			differentColor = color(240,255,225);
+	}
+
+}
+
 function setStreamWithDisplayCharacters(){
 	streams = [];
 	var x = 0;
@@ -138,13 +205,13 @@ function draw(){
 	}); 
 }
 
-function Symbol(x,y,speed,first){
+function Symbol(x,y,speed,different){
 	this.x = x;
 	this.y = y;
 	this.speed = speed;
 	this.value;
 	this.switchInterval = round(random(2,20))
-	this.first = first;
+	this.different = different;
 
 	this.setToRandomSymbol = function() {
 		if (frameCount % this.switchInterval == 0 || reset == true){
@@ -176,11 +243,19 @@ function Stream(){
 
 	this.render = function(){
 		this.symbols.forEach(function(symbol){
-			if (symbol.first){
-				fill(0, 250, 255);
+			//console.log(ColorSelect);
+			if (symbol.different){
+				fill(differentColor);
+				//fill(0, 250, 255);
 			}else{
 				//fill(244, 66, 86);
-				fill(255, 66, round(random(0,255)));
+				if (ColorSelect == "Warriors"){
+					fill(RRC, GRC, BRC);
+					console.log("Got Here");
+				}else{
+					fill(RRC, GRC, round(random(0,255)));
+				}
+				
 			}			
 			text(symbol.value, symbol.x, symbol.y);
 			symbol.rain();
