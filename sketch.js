@@ -224,6 +224,20 @@ function draw(){
 	}); 
 }
 
+function renderBackGroundImageTile(){
+	var imageSize = 20;
+	var x = 0;
+	var y = 0;
+
+	for (var i = 0; i <= width/imageSize; i++) {
+		image(imgBasketball, x, y, imgBasketball.width/5, img.height/5);
+		// var stream = new Stream();
+		// stream.generateSymbols(x,random(-1001,height/2));
+		// streams.push(stream);
+		x += imageSize;
+	}
+}
+
 function Symbol(x,y,speed,different){
 	this.x = x;
 	this.y = y;
