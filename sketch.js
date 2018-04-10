@@ -213,8 +213,16 @@ function setStreamWithDisplayCharacters(){
 
 function draw(){
 	
-	if (ColorSelect == "Warriors" || ColorSelect == "Noir" || ColorSelect == "USA" || ColorSelect == "Rainbow"){
+	if (ColorSelect == "Warriors" || ColorSelect == "Noir" || ColorSelect == "Rainbow"){
 		background(specialBackgroundColor, 200);
+	} else if (ColorSelect == "USA"){
+		background(specialBackgroundColor, 200);
+		fill(0,33,71)
+		rect(0, 0, width*.66, height/2);
+		fill(187,19,62)
+		rect(0, height/2, width, height/6);
+		rect(0, height-(height/6), width, height/6);
+		rect(width*.66, (height/4-height/12), width*.44, height/6);
 	}else{
 		background(0, 200);
 	}
@@ -279,7 +287,12 @@ function Stream(){
 				} else if (ColorSelect == "Warriors"){
 					fill(RRC, GRC, round(random(BRC-10, BRC)));
 				}else if (ColorSelect == "USA"){
-					fill(RRC, GRC, BRC);
+					if (symbol.x<width*.66 && symbol.y<height/2){
+						fill(255);
+					}else{
+						fill(RRC, GRC, BRC);
+					}
+					
 				}else if (ColorSelect == "Rainbow"){
 					fill(round(random(0,255)), round(random(0,255)), round(random(0,255)));
 				}else{
