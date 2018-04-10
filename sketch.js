@@ -57,7 +57,7 @@ function setup(){
 
 
 	//Load Image For Warriors
-	imgBasketball = loadImage("assets/BBALL.png");
+	imgBasketball = loadImage("BBALL.png");
 
 	createCanvas(
 		window.innerWidth,
@@ -214,6 +214,7 @@ function draw(){
 	
 	if (ColorSelect == "Warriors"){
 		background(255);
+		image(imgBasketball, 0, 0);
 
 	}else{
 		background(0, 200);
