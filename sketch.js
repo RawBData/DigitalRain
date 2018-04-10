@@ -214,7 +214,7 @@ function draw(){
 	
 	if (ColorSelect == "Warriors"){
 		background(255);
-		image(imgBasketball, 0, 0);
+		renderBackGroundImageTile();
 
 	}else{
 		background(0, 200);
