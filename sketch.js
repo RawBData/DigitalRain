@@ -287,10 +287,10 @@ function Stream(){
 				} else if (ColorSelect == "Warriors"){
 					fill(RRC, GRC, round(random(BRC-10, BRC)));
 				}else if (ColorSelect == "USA"){
-					if (symbol.x<width*.66 && symbol.y<height/2){
-						fill(255);
-					}else{
+					if ((symbol.y>(height/2+height/6) && symbol.y<(height-height/6))||(symbol.y<(height/4-height/12) && symbol.x>width*.66)){
 						fill(RRC, GRC, BRC);
+					}else{	
+						fill(255);
 					}
 					
 				}else if (ColorSelect == "Rainbow"){
