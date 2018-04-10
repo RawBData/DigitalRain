@@ -17,6 +17,9 @@ var RRC;
 var GRC;
 var BRC;
 var ColorSelect;
+var backgroundColor;
+
+var imgBasketball;
 
 function setup(){
 	//color setup for regular and different (special random letters)
@@ -53,11 +56,16 @@ function setup(){
 	charactersColor.changed(setCharactersColor);
 
 
+	//Load Image For Warriors
+	imgBasketball = loadImage("assets/BBALL.jpg");
+
 	createCanvas(
 		window.innerWidth,
 		window.innerHeight	
 	);
-	background(0);
+
+	backgroundColor = 0;
+	background(backgroundColor);
 	setDisplayCharacters();
 
 	textSize(symbolSize);
@@ -137,8 +145,9 @@ function setDisplayCharacters(){
 
 function setCharactersColor(){
 	console.log(charactersColor.value())
-	var ColorSelect = charactersColor.value();
+	ColorSelect = charactersColor.value();
 	console.log(ColorSelect);
+	var rando = round(random(184,255));
 
 	switch(ColorSelect) {
 	    case "Matrix":
@@ -154,6 +163,7 @@ function setCharactersColor(){
 			differentColor = color(0,250,255);
 	        break;
 	    case "Warriors":
+	    	backgroundColor = color(229, 216, 34);
 	    	RRC = 65;
 			GRC = 105;
 			BRC = 225;
@@ -166,11 +176,13 @@ function setCharactersColor(){
 			differentColor = color(240,255,225);
 	        break;
 	    case "Noir":
-	    	RRC = 51;
-			GRC = 179;
-			BRC = round(random(0,255));
-			differentColor = color(240,255,225);
+	    //var rando = round(random(184,255));
+
+	    	RRC = GRC = BRC = 206;
+			differentColor = color(169,169,169);
+	        console.log(RRC,GRC,BRC);
 	        break;
+
 	    case "Rainbow":
 	    	RRC = 51;
 			GRC = 179;
@@ -199,7 +211,12 @@ function setStreamWithDisplayCharacters(){
 }
 
 function draw(){
-	background(0, 200);
+	
+	if (ColorSelect == "Warriors"){
+		fill(RRC, GRC, BRC);
+	}else{
+		background(backgroundColor, 200);
+	}
 	streams.forEach(function(stream){
 		stream.render();
 	}); 
@@ -228,7 +245,7 @@ function Symbol(x,y,speed,different){
 function Stream(){
 	this.symbols = [];
 	this.totalSymbols = round(random(5,30));
-	this.speed = random(5, 10);
+	this.speed = random(1, 4);
 
 	this.generateSymbols = function(x,y){
 		for (var i =0; i <= this.totalSymbols; i++){
@@ -242,16 +259,19 @@ function Stream(){
 	}
 
 	this.render = function(){
+		//console.log(ColorSelect);
 		this.symbols.forEach(function(symbol){
+			//console.log(ColorSelect);
 			//console.log(ColorSelect);
 			if (symbol.different){
 				fill(differentColor);
 				//fill(0, 250, 255);
 			}else{
 				//fill(244, 66, 86);
-				if (ColorSelect == "Warriors"){
+				
+				if (ColorSelect == "Noir"){
 					fill(RRC, GRC, BRC);
-					console.log("Got Here");
+					//console.log("Got Here");
 				}else{
 					fill(RRC, GRC, round(random(0,255)));
 				}
