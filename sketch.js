@@ -164,10 +164,10 @@ function setCharactersColor(){
 	        break;
 	    case "Warriors":
 	    	specialBackgroundColor = color(130, 82, 1);
-	    	RRC = 0;
-			GRC = 61;
-			BRC = 200;
-			differentColor = color(255,215,0);
+	    	RRC = 255;
+			GRC = 215;
+			BRC = 0;
+			differentColor = color(0,61,200);
 	        break;
 	    case "USA":
 	    	specialBackgroundColor = color(242, 244, 249);
@@ -260,7 +260,7 @@ function Stream(){
 
 	this.generateSymbols = function(x,y){
 		for (var i =0; i <= this.totalSymbols; i++){
-			var different = round(random(0,15)) == 1;
+			var different = round(random(0,20)) == 1;
 			symbol = new Symbol(x,y,this.speed,different);
 			symbol.setToRandomSymbol();
 			this.symbols.push(symbol);
@@ -285,7 +285,7 @@ function Stream(){
 					//fill(RRC, GRC, BRC);
 					//console.log("Got Here");
 				} else if (ColorSelect == "Warriors"){
-					fill(RRC, GRC, round(random(BRC-10, BRC)));
+					fill(RRC, GRC, BRC);
 				}else if (ColorSelect == "USA"){
 					if ((symbol.y>(height/2+height/6) && symbol.y<(height-height/6))||(symbol.y<(height/4-height/12) && symbol.x>width*.66)){
 						fill(RRC, GRC, BRC);
